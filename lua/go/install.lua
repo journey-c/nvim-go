@@ -1,5 +1,5 @@
 local install = {}
-local utils   = require("utils.utils")
+local utils   = require("go.utils")
 local fn      = vim.fn
 local uv      = vim.loop
 local tools   = {}
@@ -23,7 +23,6 @@ local packages = {
       keyify        = 'honnef.co/go/tools/cmd/keyify@master',
       motion        = 'github.com/fatih/motion@latest',
       iferr         = 'github.com/koron/iferr@master',
-      test          = 'test.com',
 }
 
 for pkg, _ in pairs(packages) do
@@ -65,7 +64,7 @@ function install.install_all(updateBinaries)
     for k, v in pairs(packages) do
         if not uv.fs_stat(fn.join({go_bin_path, fn.tr(k, '_', '-')}, '/')) or updateBinaries == 1 then
             table.insert(install_cmd, v)
-            vim.fn.jobstart(install_cmd, {
+            fn.jobstart(install_cmd, {
                 on_exit = function(_, data, _)
                     if data == 0 then
                         local msg = msg_prefix .. k .. " finished to folder " .. go_bin_path
