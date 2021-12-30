@@ -16,7 +16,6 @@ local packages = {
       golangci_lint = 'github.com/golangci/golangci-lint/cmd/golangci-lint@latest',
       staticcheck   = 'honnef.co/go/tools/cmd/staticcheck@latest',
       gomodifytags  = 'github.com/fatih/gomodifytags@latest',
-      gorename      = 'golang.org/x/tools/cmd/gorename@master',
       gotags        = 'github.com/jstemmer/gotags@master',
       guru          = 'golang.org/x/tools/cmd/guru@master',
       impl          = 'github.com/josharian/impl@master',

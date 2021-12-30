@@ -1,10 +1,11 @@
-local utils  = {}
-local uv     = vim.loop
-local api    = vim.api
-local fn     = vim.fn
-local o      = vim.o
-local v      = vim.v
-local gopath = nil
+local utils     = {}
+local uv        = vim.loop
+local api       = vim.api
+local fn        = vim.fn
+local o         = vim.o
+local v         = vim.v
+local gopath    = nil
+local env_cache = {}
 
 function utils.Warn(msg)
     api.nvim_echo({ { "WRN: " .. msg, "WarningMsg" } }, true, {})
@@ -88,30 +89,22 @@ function utils.Exec(cmd, ...)
     return fn.system(cmd), v.shell_error
 end
 
-
-local default_list_type_commands = {
-      GoBuild =              "quickfix",
-      GoDiagnostics =        "quickfix",
-      GoDebug =              "quickfix",
-      GoErrCheck =           "quickfix",
-      GoFmt =                "locationlist",
-      GoGenerate =           "quickfix",
-      GoInstall =            "quickfix",
-      GoLint =               "quickfix",
-      GoMetaLinter =         "quickfix",
-      GoMetaLinterAutoSave = "locationlist",
-      GoModFmt =             "locationlist",
-      GoModifyTags =         "locationlist",
-      GoRename =             "quickfix",
-      GoRun =                "quickfix",
-      GoTest =               "quickfix",
-      GoVet =                "quickfix",
-      GoReferrers =          "locationlist",
-      GoImplements =         "locationlist",
-      GoCallers =            "locationlist",
-      _guru =                "locationlist",
-      _term =                "locationlist",
-      _job =                 "locationlist",
-}
+function utils.Env(key)
+    if fn.has_key(env_cache, key) then
+        return env_cache[key]
+    end
+    local ret = ""
+    if fn.executable('go') then
+       ret = fn.system({'go', 'env', key})
+       if v.shell_error ~= 0 then
+           utils.Error(ret)
+           return ""
+       end
+    else
+        ret = fn.eval("$"..key)
+    end
+    env_cache[key] = ret
+    return ret
+end
 
 return utils

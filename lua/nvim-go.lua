@@ -20,8 +20,13 @@ function nvim_go.setup(cfg)
 
     vim.api.nvim_command [[ command! -nargs=* -complete=custom,v:lua.package.loaded.go.tools_complete GoInstallBinaries lua require("go.install").install_all(0) ]]
     vim.api.nvim_command [[ command! -nargs=* -complete=custom,v:lua.package.loaded.go.tools_complete GoUpdateBinaries lua require("go.install").install_all(1) ]]
+    vim.api.nvim_command [[ command! -nargs=? -complete=dir GoPath lua require('go.gopath').GoPath({<f-args>}) ]]
     vim.api.nvim_command [[ command! -nargs=* -range GoAddTags lua require("go.gomodifytags").add(<line1>, <line2>, <count>, {<f-args>}) ]]
     vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]
+
+    --vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]
+    --vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]
+    --vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]
 end
 
 nvim_go.tools_complete = function(arglead, cmdline, cursorpos)
