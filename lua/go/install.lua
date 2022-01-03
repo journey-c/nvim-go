@@ -5,23 +5,8 @@ local uv      = vim.loop
 local tools   = {}
 
 local packages = {
-      asmfmt        = 'github.com/klauspost/asmfmt/cmd/asmfmt@latest',
-      dlv           = 'github.com/go-delve/delve/cmd/dlv@latest',
-      errcheck      = 'github.com/kisielk/errcheck@latest',
       fillstruct    = 'github.com/davidrjenni/reftools/cmd/fillstruct@master',
-      godef         = 'github.com/rogpeppe/godef@latest',
-      goimports     = 'golang.org/x/tools/cmd/goimports@master',
-      golint        = 'golang.org/x/lint/golint@master',
-      revive        = 'github.com/mgechev/revive@latest',
-      golangci_lint = 'github.com/golangci/golangci-lint/cmd/golangci-lint@latest',
-      staticcheck   = 'honnef.co/go/tools/cmd/staticcheck@latest',
       gomodifytags  = 'github.com/fatih/gomodifytags@latest',
-      gotags        = 'github.com/jstemmer/gotags@master',
-      guru          = 'golang.org/x/tools/cmd/guru@master',
-      impl          = 'github.com/josharian/impl@master',
-      keyify        = 'honnef.co/go/tools/cmd/keyify@master',
-      motion        = 'github.com/fatih/motion@latest',
-      iferr         = 'github.com/koron/iferr@master',
 }
 
 for pkg, _ in pairs(packages) do

@@ -107,4 +107,18 @@ function utils.Env(key)
     return ret
 end
 
+function utils.SubTable(t, l, r)
+    local ret = {}
+    if l < 1 then
+        l = 1
+    end
+    if r > #t then
+        r = #t
+    end
+    for idx = l, r, 1 do
+        table.insert(ret, t[idx])
+    end
+    return ret
+end
+
 return utils
