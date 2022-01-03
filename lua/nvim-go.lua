@@ -7,6 +7,9 @@ _NVIM_GO_CFG_ = {
         transform = false,
         skip_unexported = false,
     },
+    gotests = {
+        template_dir = '',
+    },
 }
 
 function nvim_go.setup(cfg)
@@ -25,6 +28,8 @@ function nvim_go.setup(cfg)
     api.nvim_command [[ command! -nargs=* -range GoAddTags lua require('go.gomodifytags').add(<line1>, <line2>, <count>, {<f-args>}) ]]
     api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require('go.gomodifytags').remove(<line1>, <line2>, <count>, {<f-args>}) ]]
     api.nvim_command [[ command! -nargs=0 GoFillStruct lua require('go.fillstruct').FillStruct() ]]
+    api.nvim_command [[ command! -nargs=* -range GoAddTest lua require('go.gotests').AddTest(<line1>, <line2>) ]]
+    api.nvim_command [[ command! -nargs=0 GoAddAllTest lua require('go.gotests').AddAllTest() ]]
 
     --vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]
     --vim.api.nvim_command [[ command! -nargs=* -range GoRemoveTags lua require("go.gomodifytags").remove(<line1>, <line2>, <count>, {<f-args>}) ]]

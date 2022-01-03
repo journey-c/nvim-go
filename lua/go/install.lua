@@ -7,6 +7,7 @@ local tools   = {}
 local packages = {
       fillstruct    = 'github.com/davidrjenni/reftools/cmd/fillstruct@master',
       gomodifytags  = 'github.com/fatih/gomodifytags@latest',
+      gotest        = 'github.com/cweill/gotests/gotests@master'
 }
 
 for pkg, _ in pairs(packages) do

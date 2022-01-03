@@ -7,16 +7,32 @@ local v         = vim.v
 local gopath    = nil
 local env_cache = {}
 
+local function echo(msg, hi)
+    local msg_list = {}
+    if type(msg) ~= "table" then
+        msg_list = fn.split(msg, "\n")
+    else
+        msg_list = msg
+    end
+    msg_list = fn.map(msg_list, 'substitute(v:val, "\t", "        ", "")')
+
+    api.nvim_exec('echohl ' .. hi, false)
+    for _, line in pairs(msg_list) do
+        api.nvim_exec('echom \"' .. line .. '\"', false)
+    end
+    api.nvim_exec('echohl NONE', false)
+end
+
 function utils.Warn(msg)
-    api.nvim_echo({ { "WRN: " .. msg, "WarningMsg" } }, true, {})
+    echo(msg, "WarningMsg")
 end
 
 function utils.Error(msg)
-    api.nvim_echo({ { "ERR: " .. msg, "ErrorMsg" } }, true, {})
+    echo(msg, "ErrorMsg")
 end
 
 function utils.Info(msg)
-    api.nvim_echo({ { "Info: " .. msg } }, true, {})
+    echo(msg, "Debug")
 end
 
 function utils.Gopath()
